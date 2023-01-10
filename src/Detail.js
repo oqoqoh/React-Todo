@@ -19,14 +19,24 @@ let YellowBtn = styled.div`
 function Detail(props) {
   
     let {id} = useParams();
-    let [style, setStyle] = useState( {display:'block'}) 
+    let [style, setStyle] = useState( {display:'block'})
+    let [inputValue, setInputValue] = useState(); 
 
     useEffect(()=>{
-      console.log("hi")
-      setTimeout(() => {
-        setStyle({display:'none'})
-      }, 3000);  
-    })
+      
+      // let timer = setTimeout(() => {
+      //   setStyle({display:'none'})
+      // }, 3000);
+      
+      if(isNaN(inputValue)){
+        console.log('숫자만 입력하세요.')
+      }
+      
+      //clean up function
+      return ()=>{
+        //clearTimeout(timer);
+      }
+    }, [inputValue])
     
     return (
     <>
@@ -42,6 +52,7 @@ function Detail(props) {
             <h4 className="pt-5">{props.goods[id].title}</h4>
             <p>{props.goods[id].content}</p>
             <p>{props.goods[id].price}원</p>
+            <input type="text" onChange={(e)=> {setInputValue(e.target.value)} }></input>
             <button className="btn btn-danger">주문하기</button> 
           </div>
         </div>
