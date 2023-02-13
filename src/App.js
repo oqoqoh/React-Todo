@@ -6,7 +6,7 @@ import itemImg2 from './img/shop-messi01.png'
 import itemImg3 from './img/shop-spain.png'
 
 import data from './data.js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Routes, Route, Link, useNavigate, Outlet, Navigate, useParams} from 'react-router-dom';
 import Goods from './Goods.js';
@@ -17,8 +17,14 @@ function App() {
   let [goods, setGoods] = useState(data);
   let [itemImgSrc, setItemImgSrc] = useState([itemImg1,itemImg2, itemImg3]);
   let [btnCount, setBtnCount] = useState(1);
-  let [moreBtnSwitch, setMoreBtnSwitch] = useState({display:'block', margin : 'auto'}); 
+  let [moreBtnSwitch, setMoreBtnSwitch] = useState({display:'block', margin : 'auto'});
+  let [detailClick, setDetailClick] = useState(0);
+  let [fade, setFade] = useState(''); 
   let navigate = useNavigate();
+
+  useEffect(()=>{
+
+  },[detailClick])
 
   return (
     <div className="App">      
@@ -48,7 +54,7 @@ function App() {
           {
             goods.map((item,idx) => {
               return (
-                <Goods key={item.id} goods={item} imgSrc={itemImgSrc[idx]} onClick={}></Goods>
+                <Goods key={item.id} goods={item} imgSrc={itemImgSrc[idx]} onClick={setDetailClick(++detailClick)}></Goods>
               )
             })
           }
