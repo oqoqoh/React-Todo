@@ -8,7 +8,7 @@ function Goods(props) {
     return (
       
       <Container>
-        <Row>
+        {/* <Row>
           {
             props.goods.map(function(a, i){
               return (
@@ -21,7 +21,19 @@ function Goods(props) {
               )
             })
           }
-        </Row>
+        </Row> */}
+          
+        
+      <Col>
+        <div className="main-item" style={{backgroundImage:'url('+props.imgSrc+')'}}
+              onClick={ ()=>{ navigate('/detail/'+props.goods.id)}} ></div>
+        <h5>{props.goods.title}</h5>
+        <p>{props.goods.price}원</p>
+      </Col>
+        
+
+
+        
       </Container>
     )
   }
