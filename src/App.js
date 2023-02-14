@@ -54,7 +54,7 @@ function App() {
           {
             goods.map((item,idx) => {
               return (
-                <Goods key={item.id} goods={item} imgSrc={itemImgSrc[idx]} onClick={setDetailClick(++detailClick)}></Goods>
+                <Goods key={item.id} goods={item} imgSrc={itemImgSrc[idx]}></Goods>
               )
             })
           }
