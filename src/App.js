@@ -16,6 +16,7 @@ import {
   Outlet,
   Navigate,
   useParams,
+  Router,
 } from "react-router-dom";
 import Goods from "./Goods.js";
 import Detail from "./routes/Detail.js";
@@ -42,13 +43,13 @@ function App() {
     <div className="App">
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Kick&Kit.com</Navbar.Brand>
+          <Navbar.Brand href="/">Kick&Kit.com</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">New Arrivals</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link path="/cart">Cart</Nav.Link>
 
-            <Link to="/">홈 이동 </Link>
-            <Link to="/detail">상세페이지 이동</Link>
+            {/* <Link to="/">홈 이동 </Link>
+            <Link to="/detail">상세페이지 이동</Link> */}
           </Nav>
         </Container>
       </Navbar>

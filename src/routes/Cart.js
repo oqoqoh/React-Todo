@@ -1,10 +1,16 @@
+import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
-import { addCount } from "../store";
+import { addCount } from "../store.js";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cartItems);
+  const state = useSelector((state) => state);
+  //const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(state.cartItems);
+  });
 
   return (
     <div>
@@ -18,16 +24,16 @@ const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((data, idx) => {
+          {state.cartItems.map((data, idx) => {
             return (
               <tr key={idx}>
-                <td>{idx}</td>
+                <td>{data.id}</td>
                 <td>{data.name}</td>
                 <td>{data.count}</td>
                 <td>
                   <button
                     onClick={() => {
-                      dispatch(addCount());
+                      dispatch(addCount(data.id));
                     }}
                   >
                     +

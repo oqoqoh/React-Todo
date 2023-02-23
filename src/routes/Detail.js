@@ -6,12 +6,15 @@ import {
   Outlet,
   Navigate,
   useParams,
+  Router,
 } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import styled, { css } from "styled-components";
 import { useEffect, useReducer, useState, useContext } from "react";
 
 import { Context1 } from "../App.js";
+import { useDispatch } from "react-redux";
+import { addCart } from "../store.js";
 
 let Box = styled.div`
   padding: 20px;
@@ -34,6 +37,9 @@ function Detail(props) {
   let [cssEnd, setCssEnd] = useState("");
 
   let { stock, goods } = useContext(Context1);
+
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -91,7 +97,21 @@ function Detail(props) {
                 value={inputValue}
               ></input>
               <p>{inputWarning}</p>
-              <button className="btn btn-danger">주문하기</button>
+              <button
+                className="btn btn-danger"
+                onClick={() => {
+                  dispatch(addCart(props.goods[id]));
+                }}
+              >
+                주문하기
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/cart");
+                }}
+              >
+                장바구니
+              </button>
             </div>
           </div>
         </div>
