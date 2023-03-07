@@ -16,23 +16,45 @@ let cartItems = createSlice({
 
   reducers: {
     addCount(state, actions) {
-      state[actions.payload].count += 1;
+      state[actions.payload].count++;
+      //arr.findIndex(), arr.find()
     },
     addCart(state, actions) {
       let res = actions.payload;
 
-      let data = {
-        id: state[state.length - 1].id + 1,
-        name: res.title,
-        count: 1,
-      };
-      state.push(data);
-      console.log(state[state.length - 1]);
+      const checkItem = state.findIndex((a) => {
+        return a.id === res.id;
+      });
+      console.log("checkItem idx : ", checkItem);
+      if (checkItem < 0) {
+        //장부구니 추가
+        console.log("장바구니 추가");
+        let data = {
+          id: state[state.length - 1].id + 1,
+          name: res.title,
+          count: 1,
+        };
+        state.push(data);
+        console.log(state[state.length - 1]);
+      } else {
+        //장바구니 수량만 증가
+        console.log("장바구니 수량만 증가");
+        state[checkItem].count++;
+      }
+    },
+    deleteItem(state, actions) {
+      console.log("payload", actions.payload);
+      let res = state.findIndex((a) => {
+        return a.id === actions.payload;
+      });
+
+      state.splice(res, 1);
+      console.log("left state", state);
     },
   },
 });
 
-export let { addCart, addCount } = cartItems.actions;
+export let { addCart, addCount, deleteItem } = cartItems.actions;
 
 export default configureStore({
   reducer: {

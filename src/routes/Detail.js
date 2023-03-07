@@ -29,34 +29,17 @@ let YellowBtn = styled.div`
 
 function Detail(props) {
   let { id } = useParams();
-  let [style, setStyle] = useState({ display: "block" });
+  //let [style, setStyle] = useState({ display: "block" });
   let [inputValue, setInputValue] = useState("");
-  let [alert, setAlert] = useState(true);
+
   let [inputWarning, setInputWarning] = useState("");
   let [tabIdx, setTabIdx] = useState(0);
-  let [cssEnd, setCssEnd] = useState("");
+  //let [cssEnd, setCssEnd] = useState("");
 
   let { stock, goods } = useContext(Context1);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      setAlert(false);
-    }, 3000);
-
-    let timer2 = setTimeout(() => {
-      setCssEnd("end");
-    }, 150);
-
-    //clean up function
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(timer2);
-      setCssEnd("");
-    };
-  }, []);
 
   useEffect(() => {
     if (isNaN(inputValue)) {
@@ -68,15 +51,15 @@ function Detail(props) {
   return (
     <>
       {stock}
-      <div className={"start " + cssEnd}>
+      <div>
         <div className="container">
           {/* <div className="alert alert-warning" style={style}>
               3초 이내 구매시 할인
           </div> */}
 
-          {alert == true ? (
+          {/* {alert == true ? (
             <div className="alert alert-warning">3초 이내 구매시 할인</div>
-          ) : null}
+          ) : null} */}
 
           <div className="row">
             <div
