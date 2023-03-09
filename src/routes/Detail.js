@@ -34,12 +34,21 @@ function Detail(props) {
 
   let [inputWarning, setInputWarning] = useState("");
   let [tabIdx, setTabIdx] = useState(0);
+
+  let [itemDetail, setItemDetail] = useState();
   //let [cssEnd, setCssEnd] = useState("");
 
-  let { stock, goods } = useContext(Context1);
+  //let { stock, goods } = useContext(Context1);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
+  console.log("id :: ", id);
+  console.log("props :: ", props.goods);
+  let findItem = props.goods.find((data) => {
+    return data.id === id;
+  });
+  console.log("find item :: ", findItem);
+  //setItemDetail(findItem);
 
   useEffect(() => {
     if (isNaN(inputValue)) {
@@ -50,7 +59,6 @@ function Detail(props) {
 
   return (
     <>
-      {stock}
       <div>
         <div className="container">
           {/* <div className="alert alert-warning" style={style}>
@@ -64,14 +72,12 @@ function Detail(props) {
           <div className="row">
             <div
               className="col-md-6"
-              style={{ backgroundImage: "url(" + props.imgSrc[id] + ")" }}
-            >
-              {/* <img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%" /> */}
-            </div>
+              style={{ backgroundImage: "url(" + findItem.imgSrc + ")" }}
+            ></div>
             <div className="col-md-6">
-              <h4 className="pt-5">{props.goods[id].title}</h4>
-              <p>{props.goods[id].content}</p>
-              <p>{props.goods[id].price}원</p>
+              <h4 className="pt-5">{findItem.title}</h4>
+              <p>{findItem.content}</p>
+              <p>{findItem.price}원</p>
               <input
                 type="text"
                 onInput={(e) => {
@@ -83,7 +89,7 @@ function Detail(props) {
               <button
                 className="btn btn-danger"
                 onClick={() => {
-                  dispatch(addCart(props.goods[id]));
+                  dispatch(addCart(findItem));
                 }}
               >
                 주문하기

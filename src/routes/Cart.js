@@ -10,7 +10,7 @@ const Cart = () => {
 
   useEffect(() => {
     console.log(state.cartItems);
-  });
+  }, [state.cartItems]);
 
   return (
     <div>
@@ -28,7 +28,7 @@ const Cart = () => {
           {state.cartItems.map((data, idx) => {
             return (
               <tr key={idx}>
-                <td>{data.id}</td>
+                <td>{idx + 1}</td>
                 <td>{data.name}</td>
                 <td>{data.count}</td>
                 <td>

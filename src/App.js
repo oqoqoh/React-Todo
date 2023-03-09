@@ -1,9 +1,6 @@
 import "./App.css";
 import { Button, Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import bannerImgSrc from "./img/shop-banner.png";
-import itemImg1 from "./img/shop-korea.png";
-import itemImg2 from "./img/shop-messi01.png";
-import itemImg3 from "./img/shop-spain.png";
 
 import data from "./data.js";
 import { useEffect, useState, createContext } from "react";
@@ -23,11 +20,11 @@ import Detail from "./routes/Detail.js";
 import TodoList from "./TodoList";
 import Cart from "./routes/Cart.js";
 
-export let Context1 = createContext();
+//export let Context1 = createContext();
 
 function App() {
   let [goods, setGoods] = useState(data);
-  let [itemImgSrc, setItemImgSrc] = useState([itemImg1, itemImg2, itemImg3]);
+  //let [itemImgSrc, setItemImgSrc] = useState([itemImg1, itemImg2, itemImg3]);
   let [btnCount, setBtnCount] = useState(1);
   let [moreBtnSwitch, setMoreBtnSwitch] = useState({
     display: "block",
@@ -61,18 +58,14 @@ function App() {
             <>
               <div
                 className="main-bg"
-                style={{ backgroundImage: "url(" + bannerImgSrc + ")" }}
+                style={{
+                  backgroundImage: "url(" + bannerImgSrc + ")",
+                }}
               ></div>
               {/* <Goods goods={goods} imgSrc={itemImgSrc}></Goods> */}
 
               {goods.map((item, idx) => {
-                return (
-                  <Goods
-                    key={item.id}
-                    goods={item}
-                    imgSrc={itemImgSrc[idx]}
-                  ></Goods>
-                );
+                return <Goods key={item.id} goods={item}></Goods>;
               })}
 
               <Button
@@ -115,14 +108,18 @@ function App() {
           }
         />
 
-        <Route
+        {/* <Route
           path="/detail/:id"
           element={
             <Context1.Provider value={{ stock, goods }}>
               <Detail goods={goods} imgSrc={itemImgSrc}></Detail>
             </Context1.Provider>
           }
-        />
+        /> */}
+        <Route
+          path="/detail/:id"
+          element={<Detail goods={goods}></Detail>}
+        ></Route>
 
         <Route path="/event" element={<Event />}>
           <Route path="one" element={<div>첫 주문시 스포츠 양말 증정</div>} />

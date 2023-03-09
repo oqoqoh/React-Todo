@@ -1,14 +1,12 @@
-import {Routes, Route, Link, useNavigate, Outlet, Navigate, useParams} from 'react-router-dom';
-import {Button, Navbar, Nav, Container, Row, Col}  from 'react-bootstrap';
-
+import { useNavigate } from "react-router-dom";
+import { Container, Col } from "react-bootstrap";
 
 function Goods(props) {
-    let navigate = useNavigate();
-  
-    return (
-      
-      <Container>
-        {/* <Row>
+  let navigate = useNavigate();
+
+  return (
+    <Container>
+      {/* <Row>
           {
             props.goods.map(function(a, i){
               return (
@@ -22,20 +20,20 @@ function Goods(props) {
             })
           }
         </Row> */}
-          
-        
+
       <Col>
-        <div className="main-item" style={{backgroundImage:'url('+props.imgSrc+')'}}
-              onClick={ ()=>{ navigate('/detail/'+props.goods.id)}} ></div>
+        <div
+          className="main-item"
+          style={{ backgroundImage: "url(" + props.goods.imgSrc + ")" }}
+          onClick={() => {
+            navigate("/detail/" + props.goods.id);
+          }}
+        ></div>
         <h5>{props.goods.title}</h5>
         <p>{props.goods.price}원</p>
       </Col>
-        
+    </Container>
+  );
+}
 
-
-        
-      </Container>
-    )
-  }
-  
-  export default Goods;
+export default Goods;
