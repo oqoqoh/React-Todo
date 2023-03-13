@@ -3,7 +3,7 @@ import { Button, Navbar, Nav, Container, Row, Col } from "react-bootstrap";
 import bannerImgSrc from "./img/shop-banner.png";
 
 import data from "./data.js";
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext, lazy, Suspense } from "react";
 import axios from "axios";
 import {
   Routes,
@@ -16,10 +16,15 @@ import {
   Router,
 } from "react-router-dom";
 import Goods from "./Goods.js";
-import Detail from "./routes/Detail.js";
+//import Detail from "./routes/Detail.js";
+//import Cart from "./routes/Cart.js";
+
 import TodoList from "./TodoList";
-import Cart from "./routes/Cart.js";
+
 import { useQuery } from "@tanstack/react-query";
+
+const Detail = lazy(() => import("./routes/Detail.js"));
+const Cart = lazy(() => import("./routes/Cart.js"));
 
 //export let Context1 = createContext();
 
@@ -75,64 +80,65 @@ function App() {
         </Container>
       </Navbar>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <div
-                className="main-bg"
-                style={{
-                  backgroundImage: "url(" + bannerImgSrc + ")",
-                }}
-              ></div>
-              {/* <Goods goods={goods} imgSrc={itemImgSrc}></Goods> */}
+      <Suspense fallback={<div>loading...</div>}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <div
+                  className="main-bg"
+                  style={{
+                    backgroundImage: "url(" + bannerImgSrc + ")",
+                  }}
+                ></div>
+                {/* <Goods goods={goods} imgSrc={itemImgSrc}></Goods> */}
 
-              {goods.map((item, idx) => {
-                return <Goods key={item.id} goods={item}></Goods>;
-              })}
+                {goods.map((item, idx) => {
+                  return <Goods key={item.id} goods={item}></Goods>;
+                })}
 
-              <Button
-                onClick={() => {
-                  let addGoods = [...goods];
+                <Button
+                  onClick={() => {
+                    let addGoods = [...goods];
 
-                  setBtnCount(++btnCount);
+                    setBtnCount(++btnCount);
 
-                  axios
-                    .get(
-                      "https://codingapple1.github.io/shop/data" +
-                        btnCount +
-                        ".json "
-                    )
-                    .then((res) => {
-                      {
-                        res.data &&
-                          res.data.map((item, i) => {
-                            return addGoods.push(item);
-                          });
-                      }
-                      setGoods(addGoods);
-                      console.log(
-                        "goods :: ",
-                        goods,
-                        " / btn count num :: ",
-                        btnCount
-                      );
-                    });
+                    axios
+                      .get(
+                        "https://codingapple1.github.io/shop/data" +
+                          btnCount +
+                          ".json "
+                      )
+                      .then((res) => {
+                        {
+                          res.data &&
+                            res.data.map((item, i) => {
+                              return addGoods.push(item);
+                            });
+                        }
+                        setGoods(addGoods);
+                        console.log(
+                          "goods :: ",
+                          goods,
+                          " / btn count num :: ",
+                          btnCount
+                        );
+                      });
 
-                  if (btnCount > 2) {
-                    setMoreBtnSwitch({ display: "none" });
-                  }
-                }}
-                style={moreBtnSwitch}
-              >
-                더 보기
-              </Button>
-            </>
-          }
-        />
+                    if (btnCount > 2) {
+                      setMoreBtnSwitch({ display: "none" });
+                    }
+                  }}
+                  style={moreBtnSwitch}
+                >
+                  더 보기
+                </Button>
+              </>
+            }
+          />
 
-        {/* <Route
+          {/* <Route
           path="/detail/:id"
           element={
             <Context1.Provider value={{ stock, goods }}>
@@ -140,18 +146,19 @@ function App() {
             </Context1.Provider>
           }
         /> */}
-        <Route
-          path="/detail/:id"
-          element={<Detail goods={goods}></Detail>}
-        ></Route>
+          <Route
+            path="/detail/:id"
+            element={<Detail goods={goods}></Detail>}
+          ></Route>
 
-        <Route path="/event" element={<Event />}>
-          <Route path="one" element={<div>첫 주문시 스포츠 양말 증정</div>} />
-          <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
-        </Route>
-        <Route path="/todo" element={<TodoList />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
-      </Routes>
+          <Route path="/event" element={<Event />}>
+            <Route path="one" element={<div>첫 주문시 스포츠 양말 증정</div>} />
+            <Route path="two" element={<div>생일기념 쿠폰 받기</div>} />
+          </Route>
+          <Route path="/todo" element={<TodoList />}></Route>
+          <Route path="/cart" element={<Cart />}></Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 }
