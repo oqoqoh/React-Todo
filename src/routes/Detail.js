@@ -29,27 +29,32 @@ let YellowBtn = styled.div`
 
 function Detail(props) {
   let { id } = useParams();
-  //let [style, setStyle] = useState({ display: "block" });
+
   let [inputValue, setInputValue] = useState("");
 
   let [inputWarning, setInputWarning] = useState("");
   let [tabIdx, setTabIdx] = useState(0);
 
   let [itemDetail, setItemDetail] = useState();
+  //let [style, setStyle] = useState({ display: "block" });
   //let [cssEnd, setCssEnd] = useState("");
-
   //let { stock, goods } = useContext(Context1);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  console.log("id :: ", id);
-  console.log("props :: ", props.goods);
-  let findItem = props.goods.find((data) => {
+
+  const findItem = props.goods.find((data) => {
     return data.id === id;
   });
-  console.log("find item :: ", findItem);
-  //setItemDetail(findItem);
 
+  //setItemDetail(findItem);
+  useEffect(() => {
+    //최근 본 목록에 id 추가
+    let watchedList = JSON.parse(localStorage.getItem("watched"));
+    watchedList.push(id);
+    const set = new Set(watchedList);
+    localStorage.setItem("watched", JSON.stringify([...set]));
+  }, []);
   useEffect(() => {
     if (isNaN(inputValue)) {
       setInputWarning("숫자만 입력가능합니다.");
