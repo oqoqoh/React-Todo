@@ -1,12 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState, memo } from "react";
 import Table from "react-bootstrap/Table";
 import { useDispatch, useSelector } from "react-redux";
 import { addCount, deleteItem } from "../store.js";
+
+const Child = memo(function () {
+  console.log("re-rendering");
+  return <div>child component</div>;
+});
 
 const Cart = () => {
   const state = useSelector((state) => state);
   //const cartItems = useSelector((state) => state.cartItems);
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     console.log(state.cartItems);
@@ -14,6 +20,14 @@ const Cart = () => {
 
   return (
     <div>
+      <Child count={count}></Child>
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        {count}
+      </button>
       <Table striped bordered hover>
         <thead>
           <tr>

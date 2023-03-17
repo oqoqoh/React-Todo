@@ -22,6 +22,7 @@ import Goods from "./Goods.js";
 import TodoList from "./TodoList";
 
 import { useQuery } from "@tanstack/react-query";
+import TestCompo from "./routes/TestCompo";
 
 const Detail = lazy(() => import("./routes/Detail.js"));
 const Cart = lazy(() => import("./routes/Cart.js"));
@@ -157,6 +158,7 @@ function App() {
           </Route>
           <Route path="/todo" element={<TodoList />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
+          <Route path="/test" element={<TestCompo />}></Route>
         </Routes>
       </Suspense>
     </div>
