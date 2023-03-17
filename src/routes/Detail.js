@@ -9,6 +9,7 @@ import {
   Router,
 } from "react-router-dom";
 import { Button, Navbar, Nav, Container, Row, Col } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 import styled, { css } from "styled-components";
 import { useEffect, useReducer, useState, useContext } from "react";
 
@@ -73,13 +74,14 @@ function Detail(props) {
           {/* {alert == true ? (
             <div className="alert alert-warning">3초 이내 구매시 할인</div>
           ) : null} */}
+          <Image src={findItem.imgSrc} rounded />
 
           <div className="row">
-            <div
+            {/* <div
               className="col-md-6"
               style={{ backgroundImage: "url(" + findItem.imgSrc + ")" }}
-            ></div>
-            <div className="col-md-6">
+            ></div> */}
+            <div className="col-md-6" style={{ margin: "auto" }}>
               <h4 className="pt-5">{findItem.title}</h4>
               <p>{findItem.content}</p>
               <p>{findItem.price}원</p>
@@ -99,21 +101,20 @@ function Detail(props) {
               >
                 주문하기
               </button>
-              <button
-                onClick={() => {
-                  navigate("/cart");
-                }}
-              >
-                장바구니
-              </button>
             </div>
           </div>
         </div>
 
-        <Box>
-          <YellowBtn>BTN</YellowBtn>
-          {/* <Button>BTN</Button> */}
+        <Box
+          onClick={() => {
+            navigate("/cart");
+          }}
+        >
+          장바구니
         </Box>
+        {/* <Box>
+          <YellowBtn>BTN</YellowBtn>          
+        </Box> */}
 
         <Nav variant="pills" defaultActiveKey="link-0">
           <Nav.Item>
