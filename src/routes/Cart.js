@@ -60,7 +60,7 @@ const Cart = () => {
                       dispatch(deleteItem(data.id));
                     }}
                   >
-                    삭제
+                    delete
                   </button>
                 </td>
               </tr>

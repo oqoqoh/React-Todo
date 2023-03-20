@@ -13,7 +13,7 @@ import Image from "react-bootstrap/Image";
 import styled, { css } from "styled-components";
 import { useEffect, useReducer, useState, useContext } from "react";
 
-import { Context1 } from "../App.js";
+import { Context1 } from "../AppOG.js";
 import { useDispatch } from "react-redux";
 import { addCart } from "../store.js";
 
