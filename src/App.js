@@ -8,14 +8,15 @@ function App() {
     console.log(Api.clientId);
     console.log(Api.url);
     axios
-      .get(Api.url, {
+      .get("/v1/search/book.json", {
+        params: { query: "고양이", display: 15 },
         headers: {
           "X-Naver-Client-Id": Api.clientId,
           "X-Naver-Client-Secret": Api.clientSecret,
         },
       })
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        console.log("res", res.data.items);
       });
   }, []);
   return (
