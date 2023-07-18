@@ -32,3 +32,34 @@
     border-radius: 5px;
     font-weight: bold;
 }
+
+/* Counter.jsx */
+.counter {
+    width: 16rem;
+    height: 8rem;
+
+    border: 2px solid gold;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 15px;
+}
+
+.counter .number {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.counter .btn {
+    transform: scale(1.5);
+    text-transform: uppercase;
+    background-color: gold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.counter:hover {
+    background-color: sandybrown;
+}
