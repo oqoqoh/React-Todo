@@ -34,6 +34,12 @@
 }
 
 /* Counter.jsx */
+.container {
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .counter {
     width: 16rem;
     height: 8rem;
@@ -62,4 +68,13 @@
 
 .counter:hover {
     background-color: sandybrown;
+}
+
+.container h1 {
+    background-color: yellow;
+}
+
+.total {
+    font-size: 1.5rem;
+    font-weight: normal;
 }
