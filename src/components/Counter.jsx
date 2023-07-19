@@ -15,7 +15,7 @@ export default function Counter({ onClick, totalCount }) {
                 onClick={() => {
                     //setCount(count + 1);
                     setCount((prev) => prev + 1);
-                    onClick(totalCount + 1);
+                    onClick();
                 }}>
                 add
             </button>
