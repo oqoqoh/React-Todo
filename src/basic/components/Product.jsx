@@ -11,13 +11,13 @@ export default function Product() {
         fetch(`data/${checkSales ? 'sale_' : ''}products.json`)
             .then((res) => res.json())
             .then((data) => {
-                console.log('received datas');
-                console.log('datas ::', data);
+                console.log('🔥 received datas');
+                console.log('🍇 datas ::', data);
                 setProducts(data);
             });
 
         return () => {
-            console.log('clean');
+            console.log('🧹clean');
         };
     }, [checkSales]);
     return (
@@ -25,14 +25,14 @@ export default function Product() {
             <input id="sale" type="checkbox" value={checkSales} onChange={handleCheckbox} />
             <label htmlFor="sale">🔥 Sales Products List</label>
             <ul>
-                {products.map((product, idx) => {
+                {products.map((product) => {
                     return (
-                        <article>
-                            <li key={idx}>
+                        <li key={product.id}>
+                            <article>
                                 <h3>{product.name}</h3>
                                 <p>{product.price}</p>
-                            </li>
-                        </article>
+                            </article>
+                        </li>
                     );
                 })}
             </ul>
