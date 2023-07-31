@@ -5,7 +5,7 @@ import './index.css';
 // import App from './AppCounter';
 // import App from './AppProducts';
 // import App from './AppXY';
-import App from './AppMentor';
+import App from './AppMentors';
 
 import reportWebVitals from './reportWebVitals';
 

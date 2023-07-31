@@ -20,7 +20,9 @@ export default function AppMentor() {
             <button
                 onClick={() => {
                     var newMentor = prompt('who is new mentor?');
-                    setPerson((prev) => ({ ...prev, mentor: { name: newMentor, title: prev.mentor.title } }));
+                    // setPerson((prev) => ({ ...prev, mentor: { name: newMentor, title: prev.mentor.title } }));
+
+                    setPerson((prev) => ({ ...prev, mentor: { ...prev.mentor, name: newMentor } }));
                 }}>
                 mentor change
             </button>
