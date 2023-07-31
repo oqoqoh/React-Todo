@@ -1,14 +1,11 @@
-body {
-    cursor: pointer;
-}
-.view {
+.container {
     height: 100vh;
     background-color: antiquewhite;
 }
 
 .pointer {
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     background-color: red;
     border-radius: 50%;
 }
