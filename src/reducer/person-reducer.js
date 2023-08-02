@@ -25,7 +25,7 @@ export default function personReducer(person, action) {
         case 'deleted': {
             return {
                 ...person,
-                mentors: person.mentors.filter((m) => m.name !== inputName),
+                mentors: person.mentors.filter((m) => m.name !== action.inputName),
             };
         }
         default: {
