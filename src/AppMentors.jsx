@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
+import personReducer from './reducer/person-reducer';
 
 export default function AppMentors() {
-    const [person, setPerson] = useState(initialPerson);
+    //const [person, setPerson] = useState(initialPerson);
+
+    const [person, dispatch] = useReducer(personReducer, initialPerson);
 
     const handleUpdate = () => {
         const inputName = prompt('whos name want to change?');
         const inputNewName = prompt('which name?');
 
-        setPerson((prev) => ({
-            ...prev,
-            mentors: prev.mentors.map((mentor) => {
-                if (mentor.name === inputName) {
-                    return { ...mentor, name: inputNewName };
-                }
-                return mentor;
-            }),
-        }));
+        dispatch({ type: 'updated', inputName, inputNewName });
     };
     const handleAdd = () => {
         const inputName = prompt('new mentor name');

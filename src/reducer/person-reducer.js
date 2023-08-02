@@ -1,7 +1,7 @@
 export default function personReducer(person, action) {
     switch (action.type) {
         case 'updated': {
-            const { prinputName, inputNewName } = action;
+            const { inputName, inputNewName } = action;
             //const prev = action.prev;
             //const current = action.current;
             return {
@@ -13,6 +13,23 @@ export default function personReducer(person, action) {
                     return mentor;
                 }),
             };
+        }
+        case 'added': {
+            const { inputName, inputTitle } = action;
+
+            return {
+                ...person,
+                mentors: [...person.mentors, { name: inputName, title: inputTitle }],
+            };
+        }
+        case 'deleted': {
+            return {
+                ...person,
+                mentors: person.mentors.filter((m) => m.name !== inputName),
+            };
+        }
+        default: {
+            throw Error(`unkown error type : ${action.type}`);
         }
     }
 }
