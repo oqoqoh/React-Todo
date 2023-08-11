@@ -13,7 +13,7 @@ export default function AppForm() {
         console.log(e.target);
         //객체의 key값이 동적으로 할당될때는 [ ] 형식으로
         //[name]이 아닌 name으로 작성 : {name: "oh", userEmail: "", userName: ""} 이렇게 들어감
-        setForm({ ...form, name: value });
+        setForm({ ...form, [name]: value });
     };
     return (
         <form onSubmit={handleSubmit}>
