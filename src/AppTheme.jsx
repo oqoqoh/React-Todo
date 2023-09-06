@@ -12,10 +12,15 @@ export default function AppTheme() {
     );
 }
 
+// Header
 function Header() {
     return <header className="header">Header</header>;
 }
+function Header2() {
+    return <header className="header">Header</header>;
+}
 
+// Main
 function Main() {
     return (
         <main className="main">
@@ -25,7 +30,7 @@ function Main() {
         </main>
     );
 }
-
+// Main/Profile
 function Profile() {
     return (
         <div>
@@ -34,11 +39,12 @@ function Profile() {
         </div>
     );
 }
-
+// Main/Profile/User
 function User() {
     return <div>User</div>;
 }
 
+// Main/Prducts
 function Products() {
     return (
         <div>
@@ -47,7 +53,7 @@ function Products() {
         </div>
     );
 }
-
+// Main/Prducts/PrductDetail
 function ProductDetail() {
     const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
     return (
@@ -61,7 +67,21 @@ function ProductDetail() {
         </div>
     );
 }
+function Contents() {
+    const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+    return (
+        <div
+            style={{
+                backgroundColor: darkMode ? 'black' : 'white',
+                color: darkMode ? 'white' : 'black',
+            }}>
+            <p>안녕하세요, 본문입니다.</p>
+            <button onClick={() => toggleDarkMode()}>Theme 변경</button>
+        </div>
+    );
+}
 
+// Footer
 function Footer() {
     return <footer>Footer</footer>;
 }
