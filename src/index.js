@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './AppProfile';
 // import App from './AppCounter';
-// import App from './AppProducts';
+import App from './basic/AppProducts';
 // import App from './AppXY';
 //import App from './AppMentors';
 //import App from './AppTheme';
-import App from './AppNames';
+//import App from './AppNames';
 
 import reportWebVitals from './reportWebVitals';
 

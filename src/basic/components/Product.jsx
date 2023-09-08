@@ -7,23 +7,35 @@ export default function Product() {
     const [checkSales, setCheckSales] = useState(false);
     const handleCheckbox = () => setCheckSales((prev) => !prev);
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState();
+
     useEffect(() => {
+        setLoading(true);
+        setError(undefined);
+
         fetch(`data/${checkSales ? 'sale_' : ''}products.json`)
             .then((res) => res.json())
             .then((data) => {
+                setProducts(data);
+
                 console.log('🔥 received datas');
                 console.log('🍇 datas ::', data);
-                setProducts(data);
-            });
+            })
+            .catch((e) => setError('ERROR!!!'))
+            .finally(() => setLoading(false));
 
         return () => {
             console.log('🧹clean');
         };
     }, [checkSales]);
+    if (loading) return <p>loading...</p>;
+    if (error) return <p>{error}</p>;
     return (
         <div>
             <input id="sale" type="checkbox" value={checkSales} onChange={handleCheckbox} />
             <label htmlFor="sale">🔥 Sales Products List</label>
+
             <ul>
                 {products.map((product) => {
                     return (
@@ -36,6 +48,7 @@ export default function Product() {
                     );
                 })}
             </ul>
+
             <button onClick={() => setCount((prev) => prev + 1)}>{count}</button>
         </div>
     );
