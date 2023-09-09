@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useProducts from '../../hooks/use-products';
 
 export default function Product() {
     const [count, setCount] = useState(0);
-    const [products, setProducts] = useState([]);
 
     const [checkSales, setCheckSales] = useState(false);
+    const [products, loading, error] = useProducts({ salesOnly: checkSales });
     const handleCheckbox = () => setCheckSales((prev) => !prev);
 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState();
-
-    useEffect(() => {
-        setLoading(true);
-        setError(undefined);
-
-        fetch(`data/${checkSales ? 'sale_' : ''}products.json`)
-            .then((res) => res.json())
-            .then((data) => {
-                setProducts(data);
-
-                console.log('🔥 received datas');
-                console.log('🍇 datas ::', data);
-            })
-            .catch((e) => setError('ERROR!!!'))
-            .finally(() => setLoading(false));
-
-        return () => {
-            console.log('🧹clean');
-        };
-    }, [checkSales]);
     if (loading) return <p>loading...</p>;
     if (error) return <p>{error}</p>;
+
     return (
         <div>
             <input id="sale" type="checkbox" value={checkSales} onChange={handleCheckbox} />
